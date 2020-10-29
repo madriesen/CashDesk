@@ -1,5 +1,5 @@
 {
-  "name": "kassasysteem",
+  "name": "CashDesk-server",
   "version": "1.0.0",
   "description": "Kassasysteem voor kassa en bestellingen",
   "main": "index.js",
