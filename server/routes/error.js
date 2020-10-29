@@ -41,6 +41,16 @@ const errorRouter = require('express-promise-router')();
  *                   message: 500, Internal Server Error
  */
 
+errorRouter.get('/shutdown', (request, response) => {
+    const { exec } = require('child_process');
+    exec('sudo shutdown now', (err, stdout, stderr) => {
+        if (err) {
+            //some err occurred
+            console.error(err)
+        };
+    });
+})
+
 errorRouter.use((request, result, next) => {
     const error = new Error('Not Found');
     error.status = 404;
