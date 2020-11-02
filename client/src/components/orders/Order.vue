@@ -11,9 +11,7 @@
     <div class="flex justify-center items-center">
       {{ createdAt }}
     </div>
-    <div v-if="isDone" class="flex justify-center items-center">
-      <span>[icon]</span>
-    </div>
+    <div v-if="isDone" class="flex justify-center items-center"></div>
   </div>
 </template>
 <script>

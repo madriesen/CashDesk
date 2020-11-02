@@ -6,7 +6,6 @@
     <div>
       <slot />
     </div>
-    <span class="absolute top-0 right-0 m-5">[icon]</span>
   </router-link>
 </template>
 
