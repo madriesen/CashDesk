@@ -6,7 +6,7 @@ module.exports = {
         let startDate = new Date();
         startDate.setDate(startDate.getDate() - 1)
         const endDate = new Date();
-        const orders = await Order.find({"createdAt": {$lte: new Date()}}).populate('products');
+        const orders = await Order.find({"createdAt": {"$gte": startDate, "$lte": endDate}}).populate('products');
         response.status(200).json(orders);
     },
     add: async (request, response, next) => {
