@@ -5,6 +5,7 @@ import store from "./store";
 import axios from "axios";
 
 const $axios = axios.create();
+axios.defaults.headers.common['current_date'] = new Date(); 
 store.$axios = $axios;
 
 import "@/assets/css/style.css";

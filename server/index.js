@@ -7,7 +7,7 @@ require('dotenv/config');
 const app = express();
 
 // Middleware
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
@@ -17,8 +17,10 @@ app.use('/', require('./routes/index'));
 // connect to database
 mongoose.Promise = global.Promise;
 mongoose.connect(
-    process.env.DB_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true}, () => console.log('connectted to DB!')
+    process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log('connectted to DB!')
 );
+// clear orders in database
+app.get('/')
 
 
 // create server

@@ -17,6 +17,7 @@
     "express-promise-router": "^4.0.1",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.10",
+    "shelljs": "^0.8.4",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {

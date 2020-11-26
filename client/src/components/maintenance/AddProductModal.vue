@@ -2,17 +2,13 @@
   <div
     class="fixed flex justify-center items-center z-50 top-0 left-0 w-full h-full bg-modal"
   >
-    <div class="w-modal mx-auto p-8 bg-white rounded shadow-2xl">
-      <div class="bg-black p-2 pr-10  flex">
+    <modal @close="$emit('close')">
+      <template v-slot:header>
         <v-h1 class="flex-1">
           Add Product
         </v-h1>
-        <v-h1 @click="$emit('close')">
-          X
-        </v-h1>
-      </div>
-
-      <div class="my-5 px-2">
+      </template>
+      <template v-slot:body>
         <div class="grid grid-cols-7 my-4">
           <label class="flex items-center" for="name">
             Name:
@@ -35,9 +31,9 @@
             v-model="product.unitPrice"
           />
         </div>
-      </div>
+      </template>
 
-      <div class="mt-5 grid grid-cols-7 my-4">
+      <template v-slot:footer>
         <div class="col-start-2 flex justify-between items-center">
           <button class="px-4 py-2 bg-green-500 rounded mr-5" @click="save">
             Save
@@ -49,18 +45,22 @@
             Cancel
           </button>
         </div>
-      </div>
-    </div>
+      </template>
+      <!-- NEED IMPLEMENTATION!
+      TODO: update!
+       -->
+    </modal>
   </div>
 </template>
 
 <script>
 import VH1 from "@/components/VH1";
+import Modal from "@/components/Modal";
 import { mapActions } from "vuex";
 
 export default {
   name: "AddProductModal",
-  components: { VH1 },
+  components: { VH1, Modal },
   data: () => {
     return {
       product: { name: "", unitPrice: 0 }

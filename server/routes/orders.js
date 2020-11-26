@@ -46,7 +46,19 @@ orderRouter.route('/')
      *               schema:
      *                 $ref: '#/components/schemas/Order'
      */
-    .post(OrderController.add);
+    .post(OrderController.add)
+    /**
+     * @swagger
+     * path:
+     *   /orders:
+     *     delete:
+     *       summary: delete all orders
+     *       tags: [Orders]
+     *       responses:
+     *         "204":
+     *           description: All orders deleted
+     */
+    .delete(OrderController.destroyAll);
 
 orderRouter.route('/:id')
     /**
@@ -111,8 +123,8 @@ orderRouter.route('/:id')
      * @swagger
      * path:
      *   /orders/:id:
-     *     patch:
-     *       summary: update order by id
+     *     delete:
+     *       summary: delete order by id
      *       tags: [Orders]
      *       parameters:
      *        - in: path

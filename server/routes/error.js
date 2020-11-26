@@ -1,4 +1,6 @@
 const errorRouter = require('express-promise-router')();
+const shell = require('shelljs');
+const Order = require('../models/Order');
 
 
 /**
@@ -41,17 +43,35 @@ const errorRouter = require('express-promise-router')();
  *                   message: 500, Internal Server Error
  */
 
-errorRouter.use('/shutdown', (request, response) => {
-    const { exec } = require('child_process');
-    exec('sudo shutdown now', (err, stdout, stderr) => {
-        if (err) {
-            //some err occurred
-            console.error(err)
-        };
-    });
+errorRouter.use('/shutdown', async (request, response) => {
+    if (shell.exec('sudo shutdown now').code !== 0) {
+        shell.echo('Error: cannot shutdown');
+        shell.exit(1);
+    }
 })
 
-errorRouter.use((request, result, next) => {
+errorRouter.use('/checkupdates', async (request, response) => {
+    if (!shell.which('git')) {
+        shell.echo('Sorry, this script requires git');
+        shell.exit(1);
+    }
+
+    const gitPull = shell.exec('cd ../ && git pull');
+
+    if (gitPull.code !== 0) {
+        shell.echo('Error: Git pull failed');
+        response.status(500).json({ error: { message: "Error: could not update repository" } });
+    }
+
+    if (gitPull.stdout.includes('up to date')) {
+        console.log('gitPull', gitPull.code)
+        response.status(200).json({ message: gitPull.stdout });
+    }
+    response.status(201).json({ message: "Updating... Don't shut down the system!" });
+
+})
+
+errorRouter.use((request, response, next) => {
     const error = new Error('Not Found');
     error.status = 404;
     next(error);
@@ -59,9 +79,9 @@ errorRouter.use((request, result, next) => {
 
 
 // error handler function
-errorRouter.use((error, request, result, next) => {
+errorRouter.use((error, request, response, next) => {
     const status = error.status || 500;
-    result.status(status).json({error: {message: error.message,}})
+    response.status(status).json({ error: { message: error.message, } })
 })
 
 module.exports = errorRouter;
