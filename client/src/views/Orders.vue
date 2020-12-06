@@ -9,12 +9,7 @@
       </button>
     </div>
     <div class="h-full py-5 px-3">
-      <order
-        v-for="order in orders"
-        :key="order._id"
-        :order="order"
-        @click="updateOrder(order)"
-      ></order>
+      <order v-for="order in orders" :key="order._id" :order="order"></order>
     </div>
     <clear-orders-modal v-if="showModal" @close="showModal = false" />
   </div>
@@ -31,27 +26,20 @@ export default {
   components: { Order, ClearOrdersModal },
   data: () => {
     return {
-      showModal: false,
+      showModal: false
     };
   },
   computed: {
     ...mapGetters({
-      orders: "orders/getOrdersDesc",
-    }),
+      orders: "orders/getOrdersDesc"
+    })
   },
   methods: {
     ...mapActions({
       getOrders: "orders/get",
       update: "orders/update",
-      destroyAll: "orders/destroyAll",
-    }),
-    updateOrder(order) {
-      if (order.status === "to be prepared") order.status = "done";
-      else {
-        order.status = "to be prepared";
-      }
-      this.update(order);
-    },
+      destroyAll: "orders/destroyAll"
+    })
   },
   mounted() {
     this.getOrders();
@@ -60,6 +48,6 @@ export default {
     socket.on("updateOrders", () => {
       this.getOrders();
     });
-  },
+  }
 };
 </script>

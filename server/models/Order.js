@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 /**
  * @swagger
@@ -18,22 +18,31 @@ const mongoose = require('mongoose');
  *          status:
  *            type: string
  *            enum: ['to be prepared', 'done', 'deleted']
+ *          comment:
+ *            type: string
  *        example:
  *           createdAt: "2020-10-25T14:07:39.706Z"
  *           status: "to be prepared"
+ *           comment: "No ketchup on the burger"
  *           products: [123ABC123, 456CDE345]
  */
-const OrderSchema = mongoose.Schema({
+const OrderSchema = mongoose.Schema(
+  {
     // createdAt: {type: Date, default: new Date()},
-    products: [{
+    products: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-    }],
+        ref: "Product",
+      },
+    ],
     status: {
-        type: String,
-        enum: ['to be prepared', 'done', 'deleted'],
-        default: 'to be prepared'
+      type: String,
+      enum: ["to be prepared", "done", "deleted"],
+      default: "to be prepared",
     },
-}, {timestamps: true})
+    comment: { type: String },
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Order', OrderSchema)
+module.exports = mongoose.model("Order", OrderSchema);

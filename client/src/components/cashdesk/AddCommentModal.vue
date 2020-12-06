@@ -1,18 +1,29 @@
 <template>
-  <modal>
+  <modal @close="$emit('close')">
     <template v-slot:header>
-      <v-h1 class="flex-1"> Clear all orders </v-h1>
+      <v-h1 class="flex-1">
+        Add comment to order
+      </v-h1>
     </template>
     <template v-slot:body>
-      <div>Are you sure you want to delete all orders?</div>
+      <div class="grid grid-cols-7 my-4">
+        <label class="flex items-center" for="name">
+          Comment:
+        </label>
+        <textarea
+          class="col-span-4 p-2 rounded"
+          id="comment"
+          v-model="comment"
+        />
+      </div>
     </template>
     <template v-slot:footer>
       <div class="col-start-2 flex justify-between items-center">
         <button
           class="px-4 py-2 bg-green-500 rounded mr-5"
-          @click="clearOrders"
+          @click="sendComment"
         >
-          Clear
+          Send
         </button>
         <button
           class="px-4 py-2 bg-red-500 rounded ml-5"
@@ -24,18 +35,21 @@
     </template>
   </modal>
 </template>
+
 <script>
 import Modal from "@/components/Modal";
 import VH1 from "@/components/VH1";
-import { mapActions } from "vuex";
-
 export default {
-  name: "clearOrdersModal",
+  name: "add-comment-modal",
   components: { Modal, VH1 },
+  data() {
+    return {
+      comment: ""
+    };
+  },
   methods: {
-    ...mapActions({ destroyAll: "orders/destroyAll" }),
-    clearOrders() {
-      this.destroyAll();
+    sendComment() {
+      this.$emit("send", this.comment);
       this.$emit("close");
     }
   }

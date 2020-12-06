@@ -27,17 +27,23 @@ const Orders = {
   },
   getters: {
     getOrdersDesc: state => {
-      state.orders.sort(function (a, b) {
+      state.orders.sort(function(a, b) {
         return b.createdAt.localeCompare(a.createdAt);
       });
+      console.log("state.orders", state.orders[0]);
       return state.orders;
     },
     getTicket: state => state.ticket
   },
   actions: {
-    send: ({ dispatch }, order) => {
+    send: ({ dispatch }, payload) => {
+      console.log("comment", payload.comment);
       axios
-        .post(process.env.VUE_APP_API_URL + "/orders", { products: order, time: new Date() })
+        .post(process.env.VUE_APP_API_URL + "/orders", {
+          products: payload.order,
+          comment: payload.comment,
+          time: new Date()
+        })
         .then(() => {
           dispatch("clearTicket");
           dispatch("get");

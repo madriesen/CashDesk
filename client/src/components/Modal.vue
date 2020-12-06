@@ -3,12 +3,12 @@
     class="fixed flex justify-center items-center z-50 top-0 left-0 w-full h-full bg-modal"
   >
     <div class="w-modal mx-auto p-8 bg-white rounded shadow-2xl">
-      <div class="bg-black p-2 pr-10  flex">
-        <slot name="header" />
+      <div class="bg-black p-2 pr-10 flex">
+        <v-h1 class="flex-1">
+          <slot name="header" />
+        </v-h1>
         <button @click="$emit('close')">
-          <v-h1>
-            X
-          </v-h1>
+          <v-h1> X </v-h1>
         </button>
       </div>
 

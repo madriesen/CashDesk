@@ -18,34 +18,53 @@
           </ul>
         </div>
       </div>
-      <div
-        class="border-t-4 border-white p-8 flex justify-between items-center"
-      >
+      <div class="border-t-4 border-white p-8 grid grid-cols-2 col-gap-4">
         <div
-          class="bg-green-500 rounded py-2 px-5 w-5/12 flex items-center justify-center"
+          class="bg-green-500 rounded h-full py-2 px-5 w-full flex items-center justify-center"
           @click="send"
         >
           <v-h1>Send</v-h1>
         </div>
-        <div
-          class="bg-red-500 rounded py-2 px-5 w-5/12 flex items-center justify-center"
-          @click="clearTicket"
-        >
-          <v-h1>Cancel</v-h1>
+        <div>
+          <div
+            class="bg-primary rounded py-2 px-5 flex items-center justify-center mb-4"
+            @click="addComment"
+          >
+            <v-h2>Comment</v-h2>
+          </div>
+
+          <div
+            class="bg-red-500 rounded py-2 px-5 flex items-center justify-center"
+            @click="clearTicket"
+          >
+            <v-h2>Cancel</v-h2>
+          </div>
         </div>
       </div>
     </div>
+    <add-comment-modal
+      v-if="showModal"
+      @close="showModal = false"
+      @send="send"
+    />
   </div>
 </template>
 
 <script>
 import VH1 from "@/components/VH1";
+import VH2 from "@/components/VH2";
+import AddCommentModal from "@/components/cashdesk/AddCommentModal";
 import TicketItem from "@/components/cashdesk/TicketItem";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Ticket",
-  components: { TicketItem, VH1 },
+  components: { TicketItem, VH1, VH2, AddCommentModal },
+  data: () => {
+    return {
+      showModal: false
+    };
+  },
   computed: {
     ...mapGetters({
       ticket: "orders/getTicket"
@@ -80,8 +99,12 @@ export default {
       clearTicket: "orders/clearTicket",
       sendTicket: "orders/send"
     }),
-    send() {
-      this.sendTicket(this.ticket);
+    send(comment = "") {
+      console.log("sent order");
+      this.sendTicket({ order: this.ticket, comment: comment });
+    },
+    addComment() {
+      this.showModal = true;
     }
   }
 };

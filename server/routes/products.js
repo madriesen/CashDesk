@@ -1,5 +1,5 @@
 const productRouter = require('express-promise-router')();
-const ProductController = require('../controllers/ProductController');
+const ProductController = require('./../controllers/ProductController');
 
 
 /**
