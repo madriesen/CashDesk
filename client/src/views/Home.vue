@@ -19,7 +19,7 @@
       @click="update"
       class="text-white bg-primary px-8 py-6 mt-16 rounded"
     >
-      Update
+      Check for updates
     </button>
 
     <error-modal v-if="showError" @close="showError = false" :error="error" />
