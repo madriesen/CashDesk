@@ -17,7 +17,7 @@
 
     <button
       @click="update"
-      class="text-white bg-green-600 px-8 py-6 mt-16 rounded"
+      class="text-white bg-primary px-8 py-6 mt-16 rounded"
     >
       Update
     </button>
