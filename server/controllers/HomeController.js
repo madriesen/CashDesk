@@ -28,8 +28,9 @@ module.exports = {
     }
 
     if (result.stdout.includes('Updating')) {
-      shell.cd('client').exec('npm install && npm run build');
-      shell.cd('../server').exec('npm install');
+      shell.cd(process.env.CURRENT_DIR + '/client').exec('npm install && npm run build').then(() => {
+        shell.cd(process.env.CURRENT_DIR + '/server').exec('npm install');
+      });
       response
         .status(201)
         .json({ message: "Updating... Don't shut down the system!" });
