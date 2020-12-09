@@ -100,7 +100,6 @@ export default {
       sendTicket: "orders/send"
     }),
     send(comment = "") {
-      console.log("sent order");
       this.sendTicket({ order: this.ticket, comment: comment });
     },
     addComment() {

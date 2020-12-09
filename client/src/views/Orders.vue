@@ -44,7 +44,7 @@ export default {
   mounted() {
     this.getOrders();
     const socket = io(process.env.VUE_APP_API_URL);
-    console.log("socket", socket);
+    console.info("socket", socket);
     socket.on("updateOrders", () => {
       this.getOrders();
     });

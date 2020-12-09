@@ -4,15 +4,11 @@
   >
     <modal @close="$emit('close')">
       <template v-slot:header>
-        <v-h1 class="flex-1">
-          Add Product
-        </v-h1>
+        <v-h1 class="flex-1"> Add Product </v-h1>
       </template>
       <template v-slot:body>
         <div class="grid grid-cols-7 my-4">
-          <label class="flex items-center" for="name">
-            Name:
-          </label>
+          <label class="flex items-center" for="name"> Name: </label>
           <input
             class="col-span-4 p-2 rounded"
             id="name"
@@ -21,9 +17,7 @@
           />
         </div>
         <div class="grid grid-cols-7 my-4">
-          <label class="flex items-center" for="price">
-            Price:
-          </label>
+          <label class="flex items-center" for="price"> Price: </label>
           <input
             class="col-span-4 p-2 rounded"
             id="price"
@@ -46,9 +40,6 @@
           </button>
         </div>
       </template>
-      <!-- NEED IMPLEMENTATION!
-      TODO: update!
-       -->
     </modal>
   </div>
 </template>
@@ -63,17 +54,17 @@ export default {
   components: { VH1, Modal },
   data: () => {
     return {
-      product: { name: "", unitPrice: 0 }
+      product: { name: "", unitPrice: 0 },
     };
   },
   methods: {
     ...mapActions({
-      addProduct: "products/add"
+      addProduct: "products/add",
     }),
     save() {
       this.addProduct(this.product);
       this.$emit("close");
-    }
-  }
+    },
+  },
 };
 </script>

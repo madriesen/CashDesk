@@ -8,7 +8,6 @@ module.exports = {
     },
     // add new product
     add: async (request, response, next) => {
-        console.log('request', request.body);
         const newProduct = await new Product(request.body).save();
         response.status(201).json(newProduct);
     },

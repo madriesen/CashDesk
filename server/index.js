@@ -19,7 +19,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(
   process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true },
-  () => console.log("connectted to DB!")
+  () => console.info("connectted to DB!")
 );
 // clear orders in database
 app.get("/");
@@ -30,14 +30,14 @@ const server = require("http").createServer(app);
 // websocket for orders
 const io = require("socket.io")(server);
 io.on("connection", (socket) => {
-  if (socket.id) console.log("socket connected");
+  if (socket.id) console.info("socket connected");
 });
 global.io = io;
 
 // start application
 const port = process.env.PORT || 5000;
 server.listen(String(port), () =>
-  console.log(`Server started on port http://localhost:${port}`)
+  console.info(`Server started on port http://localhost:${port}`)
 );
 
 module.exports = app;

@@ -10,15 +10,6 @@ module.exports = {
   update: async (request, response) => {
     const result = await gitPull();
 
-
-    // shell.cd(process.env.CURRENT_DIR + '/../');
-    // if (shell.exec('git pull').code !== 0) {
-    //   response.status(500).json({ error: { message: "Update failed!" } });
-    // };
-
-
-    console.log('result', result)
-
     function gitPull() {
       shell.cd(process.env.CURRENT_DIR);
       return shell.exec('git pull');
@@ -37,7 +28,8 @@ module.exports = {
     }
 
     if (result.stdout.includes('Updating')) {
-      shell.cd('client').exec('npm run build');
+      shell.cd('client').exec('npm install && npm run build');
+      shell.cd('../server').exec('npm install');
       response
         .status(201)
         .json({ message: "Updating... Don't shut down the system!" });

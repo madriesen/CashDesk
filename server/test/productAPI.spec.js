@@ -11,13 +11,11 @@ dotenv.config();
 
 describe('Product API', function () {
     before(() => {
-        console.log('tests start');
         Product.deleteMany({}, () => {
         });
     });
 
     afterEach(() => {
-        console.log('test done');
         Product.deleteMany({}, () => {
         });
     })
@@ -25,13 +23,13 @@ describe('Product API', function () {
     describe("POST /products", () => {
         it("should add a product to the database", (done) => {
             Chai.request(app).post('/products')
-                .send({name: "test product", unitPrice: 11.4})
+                .send({ name: "test product", unitPrice: 11.4 })
                 .end((err, response) => {
                     response.should.have.status(201);
                     response.should.be.a('object');
-                    response.body.should.include({name: "test product"});
-                    response.body.should.include({unitPrice: 11.4});
-                    response.body.should.include({isActive: true});
+                    response.body.should.include({ name: "test product" });
+                    response.body.should.include({ unitPrice: 11.4 });
+                    response.body.should.include({ isActive: true });
                     response.body.should.satisfy((object) => {
                         return (Date.parse(object.createdAt) <= new Date) && (Date.parse(object.createdAt) > (new Date(new Date - 60000)))
                     });
@@ -42,11 +40,10 @@ describe('Product API', function () {
 
     describe("GET /products", () => {
         it("should get an array of products", (done) => {
-            let product = new Product({name: 'test product', unitPrice: 11.4});
+            let product = new Product({ name: 'test product', unitPrice: 11.4 });
             product.save((error, response) => {
                 Chai.request(app).get('/products').send()
                     .end((err, response) => {
-                        // console.log('GET /products response', response)
                         response.should.have.status(200);
                         response.body.should.be.a('array').to.have.length(1);
                         response.body[0].should.have.property('name');
@@ -61,13 +58,12 @@ describe('Product API', function () {
 
     describe("PUT /products/:id", () => {
         it('should update a product and return the product', function (done) {
-            let product = new Product({name: 'test product', unitPrice: 11.4});
+            let product = new Product({ name: 'test product', unitPrice: 11.4 });
             product.save((error, product) => {
                 Chai.request(app)
                     .put('/products/' + product._id)
-                    .send({name: "broodje", unitPrice: 12.0})
+                    .send({ name: "broodje", unitPrice: 12.0 })
                     .end((error, response) => {
-                        // console.log('PUT / products/:id response', response)
                         response.should.have.status(200);
                         response.body.should.be.a('object');
                         response.body.should.have.property('name');
@@ -82,7 +78,7 @@ describe('Product API', function () {
 
     describe("DELETE /products/:id", () => {
         it('should delete a product and return 204 success', function (done) {
-            let product = new Product({name: 'test product', unitPrice: 11.4});
+            let product = new Product({ name: 'test product', unitPrice: 11.4 });
             product.save((error, product) => {
                 Chai.request(app)
                     .delete('/products/' + product._id)

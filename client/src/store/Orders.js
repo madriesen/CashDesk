@@ -30,14 +30,12 @@ const Orders = {
       state.orders.sort(function(a, b) {
         return b.createdAt.localeCompare(a.createdAt);
       });
-      console.log("state.orders", state.orders[0]);
       return state.orders;
     },
     getTicket: state => state.ticket
   },
   actions: {
     send: ({ dispatch }, payload) => {
-      console.log("comment", payload.comment);
       axios
         .post(process.env.VUE_APP_API_URL + "/orders", {
           products: payload.order,
@@ -65,8 +63,7 @@ const Orders = {
         .patch(process.env.VUE_APP_API_URL + "/orders/" + order._id, {
           status: order.status
         })
-        .then(response => {
-          console.log("response", response);
+        .then(() => {
           dispatch("get");
         });
     },
@@ -74,8 +71,7 @@ const Orders = {
       commit("CLEAR_TICKET");
     },
     destroyAll: ({ dispatch }) => {
-      axios.delete(process.env.VUE_APP_API_URL + "/orders/").then(response => {
-        console.log("response", response);
+      axios.delete(process.env.VUE_APP_API_URL + "/orders/").then(() => {
         dispatch("get");
       });
     }

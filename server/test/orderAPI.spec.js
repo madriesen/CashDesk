@@ -13,7 +13,6 @@ dotenv.config();
 describe('Order API', function () {
     // create products before all tests start so they can be added to the order
     before(async () => {
-        console.log('tests start');
         await Order.deleteMany({}, () => {
         });
         for (let i = 1; i < 6; i++) {
@@ -23,7 +22,6 @@ describe('Order API', function () {
 
     // delete all orders after each test
     afterEach(() => {
-        console.log('test done');
         Order.deleteMany({}, () => {
         });
     })
