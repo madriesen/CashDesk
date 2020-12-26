@@ -20,7 +20,7 @@
       </div>
       <div class="border-t-4 border-white p-8 grid grid-cols-2 col-gap-4">
         <div
-          class="bg-green-500 rounded h-full py-2 px-5 w-full flex items-center justify-center"
+          class="bg-green-500 rounded py-2 px-5 flex items-center justify-center"
           @click="send"
         >
           <v-h1>Send</v-h1>
