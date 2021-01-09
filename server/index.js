@@ -6,10 +6,17 @@ require("dotenv/config");
 // create app
 const app = express();
 
+const corsOptions = {
+  // origin: "*",
+  // optionsSuccessStatus: 200
+}
+
 // Middleware
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+
+app.options('*', cors());
 
 // routes
 app.use("/", require("./routes/index"));
@@ -28,7 +35,7 @@ app.get("/");
 const server = require("http").createServer(app);
 
 // websocket for orders
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {cors: corsOptions});
 io.on("connection", (socket) => {
   if (socket.id) console.info("socket connected");
 });
