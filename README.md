@@ -4,4 +4,4 @@ Cash desk application for pop-ups "mcDonalds style". The cashier set up the orde
 Setup can easily be done on a raspberry pi. For a test image for raspberry pi with cashdesk, send a mail to info@martijndriesen.me.
 The rasberry pi creates a wifi network so you don't need an extra router, but you can use it if you want. 
 
-![cashdesk preview](https://github.com/madriesen/CashDesk/images/preview.gif?raw=true)
+![cashdesk preview](https://github.com/madriesen/CashDesk/blob/master/images/preview.gif?raw=true)
