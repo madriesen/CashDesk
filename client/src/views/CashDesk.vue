@@ -1,6 +1,6 @@
 <template>
   <div id="cashDesk" class="max-h-screen max-w-screen">
-    <div class="grid grid-cols-3 h-full pt-5 px-3">
+    <div class="grid grid-cols-3 h-full pt-5 px-3 gap-2">
       <products />
       <ticket />
     </div>
