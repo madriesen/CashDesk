@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "express-promise-router": "^4.0.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.8",
+    "mongoose": "^5.13.20",
     "shelljs": "^0.8.4",
     "socket.io": "^3.0.4"
   },
